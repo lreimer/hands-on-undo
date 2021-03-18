@@ -20,11 +20,11 @@ import java.net.URI;
 import java.nio.file.Paths;
 import java.util.logging.Level;
 
+@Log
 @ApplicationScoped
 @Path("lr4j")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-@Log
 public class LR4JResource {
 
     @Context

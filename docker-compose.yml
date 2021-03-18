@@ -5,5 +5,9 @@ services:
     build:
       context: .
     image: hands-on-undo:1.0
+    environment:
+      - LR4J_DIRECTORY=/opt/payara/lr4j
+    volumes:
+      - "./build:/opt/payara/lr4j"
     ports:
       - "8080:8080"

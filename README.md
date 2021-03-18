@@ -9,17 +9,17 @@ $ ./gradlew clean ass
 $ docker-compose up --build
 
 # start the LR4J recording
-$ http post localhost:8080/api/lr4
+$ http post localhost:8080/api/lr4j
 
 # save recording to file
-$ http put localhost:8080/api/lr4/test.undo
+$ http put localhost:8080/api/lr4j/test.undo
 
 ## get recording file
-$ curl localhost:8080/api/lr4/test.undo -o test.undo
-$ http get localhost:8080/api/lr4/test.undo -d -o test.undo 
+$ curl localhost:8080/api/lr4j/test.undo -o test.undo
+$ http get localhost:8080/api/lr4j/test.undo -d -o test.undo 
 
 # delete the LR4J recording
-$ http delete localhost:8080/api/lr4 
+$ http delete localhost:8080/api/lr4j 
 ```
 
 ## Maintainer

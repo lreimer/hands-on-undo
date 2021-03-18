@@ -9,6 +9,8 @@ bin/
 .idea/
 .vscode/
 
+*.undo
+
 # Ignore Gradle GUI config
 gradle-app.setting
 
