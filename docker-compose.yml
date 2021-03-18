@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+  hands-on-undo:
+    build:
+      context: .
+    image: hands-on-undo:1.0
+    ports:
+      - "8080:8080"

@@ -1,18 +1,14 @@
-import java.time.LocalDateTime
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
-
 plugins {
+    id 'fish.payara.micro-gradle-plugin' version '1.0.3'
+
     id 'java'
     id 'war'
-    id 'fish.payara.micro-gradle-plugin' version '1.0.3'
-    id 'com.google.cloud.tools.jib' version '2.6.0'
 }
 
 repositories {
     mavenCentral()
     flatDir {
-        dirs 'lib'
+        dirs 'libs'
     }
 }
 
@@ -21,6 +17,11 @@ dependencies {
     
     providedCompile platform('org.eclipse.microprofile:microprofile:3.3')    
     providedCompile 'org.eclipse.microprofile.config:microprofile-config-api'
+
+    compileOnly 'org.projectlombok:lombok:1.18.16'
+    annotationProcessor 'org.projectlombok:lombok:1.18.16'
+
+    compile name: 'lr4j_api', version: '1.0'
 }
 
 compileJava {
@@ -37,20 +38,4 @@ payaraMicro {
     deployWar = true
     useUberJar = false
     daemon = false
-}
-
-jib {
-    allowInsecureRegistries = true
-
-    from {
-        image = 'qaware/zulu-centos-payara-micro:11.0.9-5.2020.5'
-    }
-    container {
-        appRoot = '/opt/payara/deployments/ROOT.war'
-        entrypoint = 'INHERIT'
-        args = ['--nocluster', '--disablephonehome', '--deploy', '/opt/payara/deployments/ROOT.war']
-        user = 'payara'
-        creationTime = "${DateTimeFormatter.ISO_DATE_TIME.format(LocalDateTime.now())}+01:00[Europe/Berlin]"
-        filesModificationTime = "${DateTimeFormatter.ISO_DATE_TIME.format(LocalDateTime.now())}+01:00[Europe/Berlin]"
-    }
 }
