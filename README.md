@@ -12,6 +12,7 @@ Extract the recorder archive files into the `libs/` directory. Put the replay ar
 ```bash
 # NOTE: make sure to have the lr4j record ZIP content in the libs/ directory and the replay ZIP
 # content in the replay/ directory
+
 # build without or with tests
 $ ./gradlew clean ass
 $ ./gradlew clean build -x test
@@ -36,7 +37,7 @@ $ http put localhost:8080/api/lr4j/test.undo
 $ curl localhost:8080/api/lr4j/test.undo -o replay/test.undo
 $ http get localhost:8080/api/lr4j/test.undo -d -o replay/test.undo 
 
-# delete the LR4J recording
+# stop the LR4J recording
 $ http delete localhost:8080/api/lr4j 
 
 # prepare for replay
@@ -44,7 +45,7 @@ $ http delete localhost:8080/api/lr4j
 # adjust port to 9001, add a breakpoint on DemoService.java:8
 
 # start the software replay
-$ docker exec -it `docker ps -q -f ancestor="hands-on-undo:1.0"` /opt/payara/replay/lr4j/lr4j_replay -p 9001 -i /opt/payara/lr4j/test.undo
+$ docker exec -it `docker ps -q -f ancestor="hands-on-undo:latest"` /opt/payara/replay/lr4j/lr4j_replay -p 9001 -i /opt/payara/replay/test.undo
 ```
 
 ## Maintainer

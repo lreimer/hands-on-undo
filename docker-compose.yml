@@ -4,11 +4,11 @@ services:
   hands-on-undo:
     build:
       context: .
-    image: hands-on-undo:1.0
+    image: hands-on-undo:latest
     environment:
-      - LR4J_DIRECTORY=/opt/payara/lr4j
+      - LR4J_DIRECTORY=/opt/payara/replay
     volumes:
-      - "./build:/opt/payara/lr4j"
+      - "./replay:/opt/payara/replay"
     ports:
       - "8080:8080"
       - "9001:9001"
