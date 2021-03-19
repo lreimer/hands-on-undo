@@ -7,4 +7,5 @@ ENTRYPOINT ["java", "-agentpath:/opt/payara/lr4j-record-1.0.so", "-XX:-Inline", 
 CMD ["--nocluster", "--disablephonehome", "--deploymentDir", "/opt/payara/deployments"]
 
 COPY libs/lr4j-record-1.0.so $PAYARA_PATH
+ADD replay/lr4j replay/lr4j
 COPY build/libs/hands-on-undo.war $DEPLOY_DIR
