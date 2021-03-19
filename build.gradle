@@ -14,7 +14,6 @@ repositories {
 
 dependencies {
     providedCompile 'jakarta.platform:jakarta.jakartaee-api:8.0.0'
-    
     providedCompile platform('org.eclipse.microprofile:microprofile:3.3')    
     providedCompile 'org.eclipse.microprofile.config:microprofile-config-api'
 
@@ -22,6 +21,8 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.16'
 
     compile name: 'lr4j_api', version: '1.0'
+
+    testImplementation 'junit:junit:4.12'
 }
 
 compileJava {
@@ -30,8 +31,25 @@ compileJava {
 }
 
 test {
-    useJUnitPlatform()
+    useJUnit()
+
+    /*
+    // pass to test JVM to enable recording
+    jvmArgs '-XX:-Inline', '-XX:TieredStopAtLevel=1', '-XX:UseAVX=2', '-Dsun.zip.disableMemoryMapping=true',
+            '-agentpath:libs/lr4j-record-1.0.so=save_on=failure'
+
+    // stop at first failure and record just it (set to false to record all failures)
+    failFast = true
+    */
 }
+
+task copyRuntimeLibs(type: Copy) {
+    into "$buildDir/libs"
+    from sourceSets.main.runtimeClasspath
+    include "*.jar"
+}
+
+assemble.finalizedBy copyRuntimeLibs
 
 payaraMicro {
     payaraVersion = '5.2020.5'
