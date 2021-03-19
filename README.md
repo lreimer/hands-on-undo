@@ -10,7 +10,8 @@ In order to use this demo, you must first obtain the official LR4J recorder and 
 Extract the recorder archive files into the `libs/` directory. Put the replay archive into the `replay/` directory.
 
 ```bash
-# NOTE: make sure to have the lr4j record ZIP content in the libs/ directory
+# NOTE: make sure to have the lr4j record ZIP content in the libs/ directory and the replay ZIP
+# content in the replay/ directory
 # build without or with tests
 $ ./gradlew clean ass
 $ ./gradlew clean build -x test
@@ -38,11 +39,12 @@ $ http get localhost:8080/api/lr4j/test.undo -d -o replay/test.undo
 # delete the LR4J recording
 $ http delete localhost:8080/api/lr4j 
 
+# prepare for replay
+# Load the project in IntelliJ, add a LiveRecorder->Replay Run/Debug configuration,
+# adjust port to 9001, add a breakpoint on DemoService.java:8
+
 # start the software replay
-# NOTE: make sure to have the lr4j replay ZIP in the replay/ directory
-$ cd replay
-$ docker build -t hands-on-undo:replay .
-$ docker run --rm -it -p 9000:9000 hands-on-undo:replay
+$ docker exec -it `docker ps -q -f ancestor="hands-on-undo:1.0"` /opt/payara/replay/lr4j/lr4j_replay -p 9001 -i /opt/payara/lr4j/test.undo
 ```
 
 ## Maintainer
