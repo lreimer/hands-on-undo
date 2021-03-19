@@ -43,13 +43,24 @@ test {
     */
 }
 
+task classesJar(type: Jar, dependsOn: classes) {
+    from sourceSets.main.output
+}
+
 task copyRuntimeLibs(type: Copy) {
-    into "$buildDir/libs"
+    into "replay/libs"
     from sourceSets.main.runtimeClasspath
     include "*.jar"
 }
 
-assemble.finalizedBy copyRuntimeLibs
+task copyClassesJar(type: Copy) {
+    into "replay/libs"
+    from "${buildDir}/libs/"
+    include "*.jar"
+}
+
+compileJava.finalizedBy classesJar
+assemble.finalizedBy copyRuntimeLibs, copyClassesJar
 
 payaraMicro {
     payaraVersion = '5.2020.5'

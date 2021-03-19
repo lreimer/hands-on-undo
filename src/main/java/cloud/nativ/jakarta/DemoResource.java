@@ -23,6 +23,8 @@ public class DemoResource {
 
     @GET
     public Response demo(@QueryParam("name") String name) {
+
+
         Map<String, Object> payload = singletonMap("name", service.getMessage(name));
         return Response.ok(payload).build();
     }

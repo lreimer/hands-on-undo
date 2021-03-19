@@ -9,7 +9,10 @@ COPY lr4j-replay-6.3.1.160-6.3-b0709c71-openjdk11.zip .
 RUN unzip lr4j-replay-6.3.1.160-6.3-b0709c71-openjdk11.zip
 
 WORKDIR /opt/lr4j
+
+COPY libs/ .
+
 ENTRYPOINT [ "./lr4j_replay"]
-CMD ["-i", "test.undo", "-p", "9000"]
+CMD ["-i", "test.undo", "-cp", "libs/", "-p", "9000"]
 
 COPY test.undo .
