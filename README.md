@@ -7,12 +7,17 @@ the recording. For demo purposes it also provides an endpoint to trigger busines
 ## Usage
 
 ```bash
+# build without or with tests
 $ ./gradlew clean ass
+$ ./gradlew clean build -x test
+
+# create docker image and run it
 $ docker-compose up --build
 
 # start the LR4J recording
 $ http post localhost:8080/api/lr4j
 
+# do some calls
 $ http get localhost:8080/api/demo name==Test
 $ http get localhost:8080/api/demo
 
