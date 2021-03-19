@@ -6,6 +6,9 @@ the recording. For demo purposes it also provides an endpoint to trigger busines
 
 ## Usage
 
+In order to use this demo, you must first obtain the official LR4J recorder and replay component archives from Undo.
+Extract the recorder archive files into the `libs/` directory. Put the replay archive into the `replay/` directory.
+
 ```bash
 # NOTE: make sure to have the lr4j record ZIP content in the libs/ directory
 # build without or with tests
@@ -18,8 +21,11 @@ $ docker-compose up --build
 # start the LR4J recording
 $ http post localhost:8080/api/lr4j
 
-# do some calls
-$ http get localhost:8080/api/demo name==Test
+# do some REST calls
+$ http get localhost:8080/api/demo name==Test1
+$ http get localhost:8080/api/demo name==Test2
+
+# this call will produce a NullPointerException
 $ http get localhost:8080/api/demo
 
 # save recording to file
