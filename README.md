@@ -7,6 +7,7 @@ the recording. For demo purposes it also provides an endpoint to trigger busines
 ## Usage
 
 ```bash
+# NOTE: make sure to have the lr4j record ZIP content in the libs/ directory
 # build without or with tests
 $ ./gradlew clean ass
 $ ./gradlew clean build -x test
@@ -25,11 +26,17 @@ $ http get localhost:8080/api/demo
 $ http put localhost:8080/api/lr4j/test.undo
 
 # get recording file
-$ curl localhost:8080/api/lr4j/test.undo -o test.undo
-$ http get localhost:8080/api/lr4j/test.undo -d -o test.undo 
+$ curl localhost:8080/api/lr4j/test.undo -o replay/test.undo
+$ http get localhost:8080/api/lr4j/test.undo -d -o replay/test.undo 
 
 # delete the LR4J recording
 $ http delete localhost:8080/api/lr4j 
+
+# start the software replay
+# NOTE: make sure to have the lr4j replay ZIP in the replay/ directory
+$ cd replay
+$ docker build -t hands-on-undo:replay .
+$ docker run --rm -it -p 9000:9000 hands-on-undo:replay
 ```
 
 ## Maintainer
