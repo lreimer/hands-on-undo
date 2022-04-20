@@ -31,12 +31,11 @@ $ export GITHUB_TOKEN=<your-token>
 $ make create-cluster
 $ make bootstrap-flux2
 
-# modify Flux kustomization and add
+# modify Flux System kustomization YAML and add (with Git add and push)
 # - cluster-sync.yaml
-# - notification-receiver.yaml
-# - receiver-service.yaml
-# - webhook-token.yaml
-# - image-update-automation.yaml
+$ flux reconcile source git flux-system
+$ flux reconcile kustomization flux-system
+$ flux get all
 
 # you also need to create the webhook for the Git Repository
 # Payload URL: http://<LoadBalancerAddress>/<ReceiverURL>
