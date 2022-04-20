@@ -26,3 +26,5 @@ gradle-app.setting
 # Ignore Gradle build output directory
 build
 .dccache
+
+iam-policy.json
