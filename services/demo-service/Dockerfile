@@ -10,4 +10,4 @@ CMD ["--nocluster", "--disablephonehome", "--deploymentDir", "/opt/payara/deploy
 # COPY replay/ $LR4J_DIRECTORY
 
 COPY libs/lr4j-record-1.0.so $PAYARA_PATH
-COPY build/libs/hands-on-undo.war $DEPLOY_DIR
+COPY build/libs/demo-service.war $DEPLOY_DIR

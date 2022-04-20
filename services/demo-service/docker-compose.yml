@@ -1,10 +1,10 @@
 version: "3"
 
 services:
-  hands-on-undo:
+   demo-service:
     build:
       context: .
-    image: hands-on-undo:latest
+    image: demo-service:latest
     environment:
       - LR4J_DIRECTORY=/opt/payara/replay
     volumes:

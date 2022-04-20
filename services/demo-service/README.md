@@ -1,11 +1,6 @@
-# Hands-on Undo.io
+# Demo Service
 
-This repository contains a showcase on using undo.io as a software failure replay mechanism for a Jakarta EE and Quarkus based microservices deployed to AWS EKS.
-
-## Usage
-
-In order to use this demo, you must first obtain the official LR4J recorder and replay component archives from Undo.
-Extract the recorder archive files into the `libs/` directory. Put the replay archive into the `replay/` directory.
+In order to use this demo service, you must first obtain the official LR4J recorder and replay component archives from Undo. Extract the recorder archive files into the `libs/` directory. Put the replay archive into the `replay/` directory.
 
 ```bash
 # NOTE: make sure to have the lr4j record ZIP content in the libs/ directory and the replay ZIP
@@ -43,13 +38,5 @@ $ http delete localhost:8080/api/lr4j
 # adjust port to 9001, add a breakpoint on DemoService.java:8
 
 # start the software replay
-$ docker exec -it `docker ps -q -f ancestor="hands-on-undo:latest"` /opt/payara/replay/lr4j/lr4j_replay -p 9001 -i /opt/payara/replay/test.undo
+$ docker exec -it `docker ps -q -f ancestor="demo-service:latest"` /opt/payara/replay/lr4j/lr4j_replay -p 9001 -i /opt/payara/replay/test.undo
 ```
-
-## Maintainer
-
-M.-Leander Reimer (@lreimer), <mario-leander.reimer@qaware.de>
-
-## License
-
-This software is provided under the MIT open source license, read the `LICENSE` file for details.
