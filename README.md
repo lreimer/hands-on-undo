@@ -23,13 +23,14 @@ kubectl create namespace undo-replay
 
 ```bash
 # define required ENV variables for the next steps to work
-$ export AWS_ACCOUNT_ID=export AWS_ACCOUNT_ID=`aws sts get-caller-identity --query Account --output text`
+$ export AWS_ACCOUNT_ID=`aws sts get-caller-identity --query Account --output text`
 $ export GITHUB_USER=<your-username>
 $ export GITHUB_TOKEN=<your-token>
 
 # setup an EKS cluster with Flux2
 $ make create-cluster
 $ make bootstrap-flux2
+$ git pull
 
 # modify Flux System kustomization YAML and add (with Git add and push)
 # - cluster-sync.yaml
