@@ -2,48 +2,49 @@
 
 This repository contains a showcase on using undo.io as a software failure replay mechanism for a Jakarta EE and Quarkus based microservices deployed to AWS EKS.
 
-## Usage
+## Prerequisites
 
-In order to use this demo, you must first obtain the official LR4J recorder and replay component archives from Undo.
-Extract the recorder archive files into the `libs/` directory. Put the replay archive into the `replay/` directory.
+You need to have the following tools installed locally to be able to complete all steps:
+- [AWS CLI v2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
+- [eksctl](https://eksctl.io/)
+- [kubectl](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html)
+- [flux](https://fluxcd.io/docs/get-started/)
+- [Helm](https://helm.sh/docs/intro/install/)
+
+## Local Installation
 
 ```bash
-# NOTE: make sure to have the lr4j record ZIP content in the libs/ directory and the replay ZIP
-# content in the replay/ directory
+# install latest Crossplane release using Helm in a dedicated namespace
+kubectl create namespace undo-demo
+kubectl create namespace undo-replay
+```
 
-# build without or with tests
-$ ./gradlew clean ass
-$ ./gradlew clean build -x test
+## Bootstrapping
 
-# create docker image and run it
-$ docker-compose up --build
+```bash
+# define required ENV variables for the next steps to work
+$ export AWS_ACCOUNT_ID=export AWS_ACCOUNT_ID=`aws sts get-caller-identity --query Account --output text`
+$ export GITHUB_USER=lreimer
+$ export GITHUB_TOKEN=<your-token>
 
-# start the LR4J recording
-$ http post localhost:8080/api/lr4j
+# setup an EKS cluster with Flux2
+$ make create-cluster
+$ make bootstrap-flux2
 
-# do some REST calls
-$ http get localhost:8080/api/demo name==Test1
-$ http get localhost:8080/api/demo name==Test2
+# modify Flux kustomization and add
+# - cluster-sync.yaml
+# - notification-receiver.yaml
+# - receiver-service.yaml
+# - webhook-token.yaml
+# - image-update-automation.yaml
 
-# this call will produce a NullPointerException
-$ http get localhost:8080/api/demo
+# you also need to create the webhook for the Git Repository
+# Payload URL: http://<LoadBalancerAddress>/<ReceiverURL>
+# Secret: the webhook-token value
+$ kubectl -n flux-system get svc/receiver
+$ kubectl -n flux-system get receiver/webapp
 
-# save recording to file
-$ http put localhost:8080/api/lr4j/test.undo
-
-# get recording file
-$ curl localhost:8080/api/lr4j/test.undo -o replay/test.undo
-$ http get localhost:8080/api/lr4j/test.undo -d -o replay/test.undo 
-
-# stop the LR4J recording
-$ http delete localhost:8080/api/lr4j 
-
-# prepare for replay
-# Load the project in IntelliJ, add a LiveRecorder->Replay Run/Debug configuration,
-# adjust port to 9001, add a breakpoint on DemoService.java:8
-
-# start the software replay
-$ docker exec -it `docker ps -q -f ancestor="hands-on-undo:latest"` /opt/payara/replay/lr4j/lr4j_replay -p 9001 -i /opt/payara/replay/test.undo
+$ make delete-cluster
 ```
 
 ## Maintainer

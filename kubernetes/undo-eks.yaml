@@ -1,0 +1,37 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: undo-eks
+  region: eu-central-1
+  version: "1.21"
+
+iam:
+  withOIDC: true
+
+vpc:
+  clusterEndpoints:
+    privateAccess: true
+    publicAccess: true
+
+cloudWatch:
+  clusterLogging:
+    enableTypes: ["*"]
+
+managedNodeGroups:
+  - name: managed-ng-1
+    instanceType: t3.medium
+    minSize: 3
+    maxSize: 5
+    desiredCapacity: 3
+    volumeSize: 20
+    ssh:
+      allow: false
+    labels: {role: worker}
+    tags:
+      nodegroup-role: worker
+    iam:
+      withAddonPolicies:
+        externalDNS: true
+        certManager: true
+        albIngress: true
