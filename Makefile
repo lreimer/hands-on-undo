@@ -5,7 +5,7 @@ iam-policy.json:
 		--policy-document file://iam-policy.json
 
 create-cluster: iam-policy.json
-	@eksctl create cluster -f kubernetes/undo-eks.yaml
+	@eksctl create cluster -f undo-eks.yaml
 	@eksctl create iamserviceaccount \
 		--cluster=undo-eks \
 		--namespace=kube-system \
@@ -24,4 +24,4 @@ bootstrap-flux2:
   		--personal
 
 delete-cluster:
-	@eksctl delete cluster -f kubernetes/undo-eks.yaml
+	@eksctl delete cluster -f undo-eks.yaml
