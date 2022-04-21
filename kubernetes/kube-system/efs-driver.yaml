@@ -3,14 +3,6 @@ kind: ServiceAccount
 metadata:
   labels:
     app.kubernetes.io/name: aws-efs-csi-driver
-  name: efs-csi-controller-sa
-  namespace: kube-system
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  labels:
-    app.kubernetes.io/name: aws-efs-csi-driver
   name: efs-csi-node-sa
   namespace: kube-system
 ---
