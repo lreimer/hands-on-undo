@@ -1,0 +1,22 @@
+Interaction:
+
+    Demo-service -> Vehicle-service
+
+# Start the LR4J recording
+$ http post localhost:8080/api/lr4j
+
+# REST call with valid request
+$ http get localhost:8080/api/demo {"id":"1HGSQDUO4867294"}
+
+# REST call with invalid request will produce an IllegalArgumentException
+$ http get localhost:8080/api/demo {"id":""}
+
+# Save recording to file
+$ http put localhost:8080/api/lr4j/test.undo
+
+# Get recording file
+$ curl localhost:8080/api/lr4j/test.undo -o replay/test.undo
+$ http get localhost:8080/api/lr4j/test.undo -d -o replay/test.undo
+
+# Stop the LR4J recording
+$ http delete localhost:8080/api/lr4j

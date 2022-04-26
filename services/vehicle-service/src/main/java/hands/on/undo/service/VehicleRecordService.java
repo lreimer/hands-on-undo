@@ -9,8 +9,8 @@ public class VehicleRecordService implements VehicleRecord {
 
     @Override
     public VehicleRecordResponse find(String id) {
-        if (id == null) {
-            throw new RuntimeException("Id provided cannot be null.");
+        if (id == null || id.isEmpty()) {
+            throw new IllegalArgumentException("Id provided cannot be null or empty.");
         }
         return VehicleRecordResponse.builder()
                 .withName("Test Name")

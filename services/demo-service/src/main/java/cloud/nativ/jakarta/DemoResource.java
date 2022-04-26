@@ -1,5 +1,7 @@
 package cloud.nativ.jakarta;
 
+import cloud.nativ.jakarta.dto.GenericRequest;
+import cloud.nativ.jakarta.web.WebClient;
 import lombok.extern.java.Log;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -19,11 +21,10 @@ import static java.util.Collections.singletonMap;
 public class DemoResource {
 
     @Inject
-    private DemoService service;
+    private WebClient webClient;
 
     @GET
-    public Response demo(@QueryParam("name") String name) {
-        Map<String, Object> payload = singletonMap("name", service.getMessage(name));
-        return Response.ok(payload).build();
+    public Response demo(final GenericRequest request) {
+        return Response.ok(webClient.handleRequest(request.getId())).build();
     }
 }
