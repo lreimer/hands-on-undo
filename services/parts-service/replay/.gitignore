@@ -1,0 +1,6 @@
+*.undo
+*.zip
+*.jar
+
+libs/
+lr4j/
