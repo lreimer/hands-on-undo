@@ -1,4 +1,4 @@
-package hands.on.undo;
+package hands.on.undo.parts;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;

@@ -1,4 +1,4 @@
-package hands.on.undo;
+package hands.on.undo.parts;
 
 import java.util.Collection;
 import java.util.Collections;

@@ -1,4 +1,4 @@
-package hands.on.undo;
+package hands.on.undo.lr4j;
 
 import io.undo.lr.APICallFailed;
 import io.undo.lr.NoAttachYama;
