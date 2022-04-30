@@ -21,4 +21,4 @@ docker_build('lreimer/vehicle-service', './vehicle-service/',
   dockerfile='vehicle-service/src/main/docker/Dockerfile.jvm', only=['./build/', './libs/'])
 
 k8s_yaml(['vehicle-service/k8s/deployment.yaml', 'vehicle-service/k8s/service.yaml'])
-k8s_resource(workload='vehicle-service', port_forwards=[port_forward(28080, 8080, 'Vehicle API')], labels=['Vehicle'])
+k8s_resource(workload='vehicle-service', port_forwards=[port_forward(18081, 8081, 'Vehicle API')], labels=['Vehicle'])

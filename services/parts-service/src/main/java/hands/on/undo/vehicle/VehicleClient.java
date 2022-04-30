@@ -1,4 +1,4 @@
-package hands.on.undo;
+package hands.on.undo.vehicle;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -6,11 +6,15 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 
+import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
+
+@RegisterRestClient
+@Path("/api/vehicle")
+@Consumes(MediaType.APPLICATION_JSON)
 public interface VehicleClient {
 
     @GET
-    @Path("/api/vehicles/{vin17}")
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("{vin17}")
     Vehicle getVehicle(@PathParam("vin17") String vin17);
     
 }

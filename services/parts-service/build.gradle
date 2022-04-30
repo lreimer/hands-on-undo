@@ -16,6 +16,7 @@ dependencies {
     providedCompile 'jakarta.platform:jakarta.jakartaee-api:8.0.0'
     providedCompile platform('org.eclipse.microprofile:microprofile:3.3')    
     providedCompile 'org.eclipse.microprofile.config:microprofile-config-api'
+    providedCompile 'org.eclipse.microprofile.rest.client:microprofile-rest-client-api'
 
     compileOnly 'org.projectlombok:lombok:1.18.16'
     annotationProcessor 'org.projectlombok:lombok:1.18.16'

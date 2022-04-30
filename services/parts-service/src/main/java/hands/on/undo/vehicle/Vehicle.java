@@ -1,4 +1,4 @@
-package hands.on.undo;
+package hands.on.undo.vehicle;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

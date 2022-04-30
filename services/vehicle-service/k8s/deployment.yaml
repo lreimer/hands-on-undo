@@ -24,4 +24,4 @@ spec:
             cpu: "1"
         ports:
         - name: http
-          containerPort: 8080
+          containerPort: 8081
