@@ -1,4 +1,4 @@
-FROM qaware/zulu-centos-payara-micro:11.0.9-5.2020.5
+FROM qaware/zulu-centos-payara-micro:11.0.12-5.2021.10
 
 RUN mkdir $PAYARA_PATH/replay
 ENV LR4J_DIRECTORY=$PAYARA_PATH/replay

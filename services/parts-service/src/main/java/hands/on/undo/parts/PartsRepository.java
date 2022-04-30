@@ -23,7 +23,7 @@ import hands.on.undo.vehicle.VehicleClient;
 public class PartsRepository {
 
     @Inject
-    @ConfigProperty(name = "vehicle.base.uri", defaultValue = "http://localhost:8081")
+    @ConfigProperty(name = "vehicle.base.uri", defaultValue = "http://localhost:8081/api")
     private URI baseUri;
 
     private VehicleClient client;
@@ -31,7 +31,7 @@ public class PartsRepository {
 
     @PostConstruct
     public void initialize() {
-        parts.put("BMW-E20-4711", List.of(
+        parts.put("VW-1J-2003", List.of(
             new Part("Tires", "1234567890"), 
             new Part("Door (right", "1234567891"),
             new Part("Door (left)", "1234567892"),
@@ -52,7 +52,7 @@ public class PartsRepository {
         }
 
         Vehicle vehicle = client.getVehicle(vin17);
-        String key = String.format("%s-%s-%s", vehicle.getBrand(), vehicle.getModel(), vehicle.getType());
+        String key = String.format("%s-%s-%s", vehicle.getBrand(), vehicle.getModel(), vehicle.getYear());
         return parts.get(key);
     }
     

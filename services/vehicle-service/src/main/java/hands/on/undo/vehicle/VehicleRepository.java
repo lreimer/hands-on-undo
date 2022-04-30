@@ -14,7 +14,7 @@ public class VehicleRepository {
 
     @PostConstruct
     public void initialize() {
-        vehicles.put("B079V9ZDNY", new Vehicle("B079V9ZDNY", "BMW", "E20", "4711"));
+        vehicles.put("WVWZZZ1JZ3W386752", new Vehicle("WVWZZZ1JZ3W386752", "VW", "1J", "2003"));
     }
 
     public Collection<Vehicle> findAll() {

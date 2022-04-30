@@ -9,7 +9,7 @@ import javax.ws.rs.core.MediaType;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 @RegisterRestClient
-@Path("/api/vehicle")
+@Path("/vehicle")
 @Consumes(MediaType.APPLICATION_JSON)
 public interface VehicleClient {
 

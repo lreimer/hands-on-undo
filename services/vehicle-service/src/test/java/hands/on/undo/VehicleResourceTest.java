@@ -12,7 +12,7 @@ public class VehicleResourceTest {
     @Test
     public void testGetVehicleEndpoint1() {
         given()
-          .when().get("/api/vehicle/B079V9ZDNY")
+          .when().get("/api/vehicle/WVWZZZ1JZ3W386752")
           .then()
              .statusCode(200)
              .body(is(not(nullValue())));

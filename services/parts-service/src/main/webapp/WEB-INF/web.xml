@@ -5,6 +5,9 @@
 
     <distributable/>
 
-    <display-name>Hands on Undo.io</display-name>
+    <display-name>Parts Service</display-name>
 
+    <welcome-file-list> 
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list> 
 </web-app>

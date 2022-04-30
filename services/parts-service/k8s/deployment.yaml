@@ -22,6 +22,9 @@ spec:
           limits:
             memory: "1024Mi"
             cpu: "2"
+        env:
+          - name: VEHICLE_BASE_URI
+            value: http://vehicle-service:8081/api
         ports:
         - name: http
           containerPort: 8080

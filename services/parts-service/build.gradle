@@ -1,5 +1,5 @@
 plugins {
-    // id 'fish.payara.micro-gradle-plugin' version '1.0.3'
+    id 'fish.payara.micro-gradle-plugin' version '1.1.0'
 
     id 'java'
     id 'war'
@@ -64,11 +64,9 @@ copyClassesJar.dependsOn classesJar
 compileJava.finalizedBy classesJar
 assemble.finalizedBy copyRuntimeLibs, copyClassesJar
 
-/*
 payaraMicro {
-    payaraVersion = '5.2020.5'
+    payaraVersion = '5.2021.10'
     deployWar = true
     useUberJar = false
     daemon = false
 }
-*/
