@@ -1,9 +1,10 @@
-package hands.on.undo.lr4j;
+package hands.on.undo;
 
 import io.undo.lr.APICallFailed;
 import io.undo.lr.NoAttachYama;
 import io.undo.lr.RecordInProgress;
 import io.undo.lr.UndoLR;
+import lombok.extern.java.Log;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -17,8 +18,9 @@ import javax.ws.rs.core.UriInfo;
 import java.io.File;
 import java.net.URI;
 import java.nio.file.Paths;
-import io.quarkus.logging.Log;
+import java.util.logging.Level;
 
+@Log
 @ApplicationScoped
 @Path("lr4j")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -35,16 +37,16 @@ public class LR4JResource {
     @POST
     public Response start() {
         try {
-            Log.info("Starting LR4J recording.");
+            LOGGER.info("Starting LR4J recording.");
             UndoLR.start();
         } catch (RecordInProgress recordInProgress) {
-            Log.warn("LR4J recording in progress.", recordInProgress);
+            LOGGER.log(Level.WARNING, "LR4J recording in progress.", recordInProgress);
             return Response.status(Response.Status.CONFLICT).build();
         } catch (NoAttachYama noAttachYama) {
-            Log.warn("LR4J attachment error.", noAttachYama);
+            LOGGER.log(Level.SEVERE, "LR4J attachment error.", noAttachYama);
             return Response.serverError().build();
         } catch (APICallFailed apiCallFailed) {
-            Log.warn("LR4J API call failed.", apiCallFailed);
+            LOGGER.log(Level.SEVERE, "LR4J API call failed.", apiCallFailed);
             return Response.serverError().build();
         }
         return Response.noContent().build();
@@ -53,10 +55,10 @@ public class LR4JResource {
     @DELETE
     public Response stop() {
         try {
-            Log.info("Stopping LR4J recording.");
+            LOGGER.info("Stopping LR4J recording.");
             UndoLR.stop();
         } catch (APICallFailed apiCallFailed) {
-            Log.warn("LR4J API call failed.", apiCallFailed);
+            LOGGER.log(Level.SEVERE, "LR4J API call failed.", apiCallFailed);
             return Response.serverError().build();
         }
         return Response.noContent().build();
@@ -66,10 +68,10 @@ public class LR4JResource {
     @Path("/{filename}")
     public Response save(@PathParam("filename") @NotBlank String filename) {
         try {
-            Log.infof("Saving LR4J recording to %s", filename);
+            LOGGER.log(Level.INFO, "Saving LR4J recording to {0}", filename);
             UndoLR.save(getFilename(filename));
         } catch (APICallFailed apiCallFailed) {
-            Log.warn("LR4J API call failed.", apiCallFailed);
+            LOGGER.log(Level.SEVERE, "LR4J API call failed.", apiCallFailed);
             return Response.serverError().build();
         }
 
@@ -81,7 +83,7 @@ public class LR4JResource {
     @Path("/{filename}")
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
     public Response get(@PathParam("filename") @NotBlank String filename) {
-        Log.infof("Reading LR4J recording %s", filename);
+        LOGGER.log(Level.INFO, "Reading LR4J recording {0}", filename);
         return Response.ok(new File(getFilename(filename)))
                 .header("Content-Disposition", "attachment; filename=" + filename)
                 .build();

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: parts-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: parts-service
+  template:
+    metadata:
+      labels:
+        app: parts-service
+    spec:
+      containers:
+      - name: parts-service
+        image: lreimer/parts-service
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "1"
+          limits:
+            memory: "1024Mi"
+            cpu: "2"
+        ports:
+        - name: http
+          containerPort: 8080

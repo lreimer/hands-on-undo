@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vehicle-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vehicle-service
+  template:
+    metadata:
+      labels:
+        app: vehicle-service
+    spec:
+      containers:
+      - name: vehicle-service
+        image: lreimer/vehicle-service
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "0.5"
+          limits:
+            memory: "512Mi"
+            cpu: "1"
+        ports:
+        - name: http
+          containerPort: 8080

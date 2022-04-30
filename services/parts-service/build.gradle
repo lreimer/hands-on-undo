@@ -1,0 +1,73 @@
+plugins {
+    // id 'fish.payara.micro-gradle-plugin' version '1.0.3'
+
+    id 'java'
+    id 'war'
+}
+
+repositories {
+    mavenCentral()
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    providedCompile 'jakarta.platform:jakarta.jakartaee-api:8.0.0'
+    providedCompile platform('org.eclipse.microprofile:microprofile:3.3')    
+    providedCompile 'org.eclipse.microprofile.config:microprofile-config-api'
+
+    compileOnly 'org.projectlombok:lombok:1.18.16'
+    annotationProcessor 'org.projectlombok:lombok:1.18.16'
+
+    implementation name: 'lr4j_api', version: '1.0'
+
+    testImplementation 'junit:junit:4.12'
+}
+
+compileJava {
+    targetCompatibility = '11'
+    sourceCompatibility = '11'
+}
+
+test {
+    useJUnit()
+
+    /*
+    // pass to test JVM to enable recording
+    jvmArgs '-XX:-Inline', '-XX:TieredStopAtLevel=1', '-XX:UseAVX=2', '-Dsun.zip.disableMemoryMapping=true',
+            '-agentpath:libs/lr4j-record-1.0.so=save_on=failure'
+
+    // stop at first failure and record just it (set to false to record all failures)
+    failFast = true
+    */
+}
+
+task classesJar(type: Jar, dependsOn: classes) {
+    from sourceSets.main.output
+}
+
+task copyRuntimeLibs(type: Copy) {
+    into "replay/libs"
+    from sourceSets.main.runtimeClasspath
+    include "*.jar"
+}
+
+task copyClassesJar(type: Copy) {
+    into "replay/libs"
+    from "${buildDir}/libs/"
+    include "*.jar"
+}
+
+copyClassesJar.dependsOn classesJar
+compileJava.finalizedBy classesJar
+assemble.finalizedBy copyRuntimeLibs, copyClassesJar
+
+/*
+payaraMicro {
+    payaraVersion = '5.2020.5'
+    deployWar = true
+    useUberJar = false
+    daemon = false
+}
+*/

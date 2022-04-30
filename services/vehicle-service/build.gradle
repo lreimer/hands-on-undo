@@ -5,7 +5,9 @@ plugins {
 
 repositories {
     mavenCentral()
-    mavenLocal()
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 dependencies {
@@ -20,12 +22,16 @@ dependencies {
     implementation 'io.quarkus:quarkus-arc'
     implementation 'io.quarkus:quarkus-resteasy'
     implementation 'io.undo.jdwp:lr4j_api:1.0'
+
+    compileOnly 'org.projectlombok:lombok:1.18.16'
+    annotationProcessor 'org.projectlombok:lombok:1.18.16'
+
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.rest-assured:rest-assured'
 }
 
 group 'hands.on.undo'
-version '1.0.0-SNAPSHOT'
+version '1.0.0'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_11
