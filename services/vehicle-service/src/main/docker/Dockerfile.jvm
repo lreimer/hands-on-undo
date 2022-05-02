@@ -75,13 +75,11 @@
 #   accessed directly. (example: "foo.example.com,bar.example.com")
 #
 ###
-FROM registry.access.redhat.com/ubi8/openjdk-11:1.11
+FROM registry.access.redhat.com/ubi8/openjdk-11:1.11 AS default
 
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en'
 
-
 # We make four distinct layers so if there are application changes the library layers can be re-used
-COPY --chown=185 libs/ /deployments/lib/
 COPY --chown=185 build/quarkus-app/lib/ /deployments/lib/
 COPY --chown=185 build/quarkus-app/*.jar /deployments/
 COPY --chown=185 build/quarkus-app/app/ /deployments/app/
@@ -93,3 +91,10 @@ ENV AB_JOLOKIA_OFF=""
 ENV JAVA_OPTS="-Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager"
 ENV JAVA_APP_JAR="/deployments/quarkus-run.jar"
 
+FROM default AS undo
+
+RUN mkdir /deployments/replay
+ENV LR4J_DIRECTORY=/deployments/replay
+
+COPY --chown=185 libs/lr4j-record-1.0.so /deployments/lib/
+ENV JAVA_OPTS="-agentpath:/deployments/lib/lr4j-record-1.0.so -XX:-Inline -XX:TieredStopAtLevel=1 -XX:UseAVX=2 -Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager"

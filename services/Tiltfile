@@ -7,7 +7,7 @@
 local_resource('parts-service-build', './gradlew assemble', dir='parts-service',
    deps=['./parts-service/build.gradle', './parts-service/src/'], labels=['Parts'])
 
-docker_build('lreimer/parts-service', './parts-service/', 
+docker_build('lreimer/parts-service', './parts-service/', target='undo',
   dockerfile='parts-service/Dockerfile', only=['./build/', './libs/'])
 
 k8s_yaml(['parts-service/k8s/deployment.yaml', 'parts-service/k8s/service.yaml'])
@@ -17,7 +17,7 @@ k8s_resource(workload='parts-service', port_forwards=[port_forward(18080, 8080, 
 local_resource('vehicle-service-build', './gradlew assemble', dir='vehicle-service',
   deps=['./vehicle-service/build.gradle', './vehicle-service/src/'], labels=['Vehicle'])
 
-docker_build('lreimer/vehicle-service', './vehicle-service/', 
+docker_build('lreimer/vehicle-service', './vehicle-service/', target='undo',
   dockerfile='vehicle-service/src/main/docker/Dockerfile.jvm', only=['./build/', './libs/'])
 
 k8s_yaml(['vehicle-service/k8s/deployment.yaml', 'vehicle-service/k8s/service.yaml'])
