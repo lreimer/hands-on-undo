@@ -26,11 +26,11 @@ import io.quarkus.logging.Log;
 public class LR4JResource {
 
     @Context
-    private UriInfo uriInfo;
+    UriInfo uriInfo;
 
     @Inject
     @ConfigProperty(name = "lr4j.directory", defaultValue = "/tmp/")
-    private String lr4jDirectory;
+    String lr4jDirectory;
 
     @POST
     public Response start() {
