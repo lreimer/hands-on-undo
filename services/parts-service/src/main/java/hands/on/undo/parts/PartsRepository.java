@@ -53,7 +53,8 @@ public class PartsRepository {
         LOGGER.log(Level.INFO, "vin17=%s", vin17);
         if (vin17 == null) {
             // return all parts
-            return parts.values().stream().flatMap(List::stream).collect(Collectors.toList());
+            return parts.values().stream()
+                .flatMap(List::stream).collect(Collectors.toList());
         }
 
         Vehicle vehicle = client.getVehicle(vin17);
