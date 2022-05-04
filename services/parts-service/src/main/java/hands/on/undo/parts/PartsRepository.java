@@ -40,18 +40,20 @@ public class PartsRepository {
         ));
 
         this.client = RestClientBuilder.newBuilder()
-                        .connectTimeout(5, TimeUnit.SECONDS)
-                        .readTimeout(1, TimeUnit.SECONDS)
+                        .connectTimeout(30, TimeUnit.SECONDS)
+                        .readTimeout(30, TimeUnit.SECONDS)
                         .baseUri(baseUri)
                         .build(VehicleClient.class);
     }
 
     public Collection<Part> findParts(String vin17) {
+        System.out.printf("vin17 = %s\n", vin17);
         if (vin17 == null) {
             return Collections.emptyList();
         }
 
         Vehicle vehicle = client.getVehicle(vin17);
+        System.out.printf("vin17 = %s, vehicle = %s\n", vin17, vehicle);
         String key = String.format("%s-%s-%s", vehicle.getBrand(), vehicle.getModel(), vehicle.getYear());
         return parts.get(key);
     }

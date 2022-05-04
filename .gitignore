@@ -31,3 +31,5 @@ build/
 
 iam-policy.json
 efs-policy.json
+
+tags
