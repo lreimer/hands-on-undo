@@ -20,7 +20,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
-  path: ./kubernetes/clusters
+  path: ./kubernetes/clusters/undo-demo
   prune: true
   sourceRef:
     kind: GitRepository

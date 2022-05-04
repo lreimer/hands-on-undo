@@ -38,7 +38,7 @@ bootstrap-demo-flux2:
 		--owner=$(GITHUB_USER) \
   		--repository=hands-on-undo \
   		--branch=main \
-  		--path=./kubernetes/clusters \
+  		--path=./kubernetes/clusters/undo-demo \
 		--components-extra=image-reflector-controller,image-automation-controller \
 		--read-write-key \
   		--personal
@@ -68,7 +68,7 @@ bootstrap-lr4j-flux2:
 		--owner=$(GITHUB_USER) \
   		--repository=hands-on-undo \
   		--branch=main \
-  		--path=./kubernetes/clusters \
+  		--path=./kubernetes/clusters/undo-lr4j \
 		--components-extra=image-reflector-controller,image-automation-controller \
 		--read-write-key \
   		--personal
