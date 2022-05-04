@@ -1,13 +1,13 @@
 package hands.on.undo.parts;
 
 import java.net.URI;
-import java.net.URL;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -18,7 +18,9 @@ import org.eclipse.microprofile.rest.client.RestClientBuilder;
 
 import hands.on.undo.vehicle.Vehicle;
 import hands.on.undo.vehicle.VehicleClient;
+import lombok.extern.java.Log;
 
+@Log
 @ApplicationScoped
 public class PartsRepository {
 
@@ -47,13 +49,13 @@ public class PartsRepository {
     }
 
     public Collection<Part> findParts(String vin17) {
-        System.out.printf("vin17 = %s\n", vin17);
+        LOGGER.log(Level.INFO, "vin17=%s", vin17);
         if (vin17 == null) {
             return Collections.emptyList();
         }
 
         Vehicle vehicle = client.getVehicle(vin17);
-        System.out.printf("vin17 = %s, vehicle = %s\n", vin17, vehicle);
+        LOGGER.log(Level.INFO, "vin17=%s --> vehicle=%s", new Object[]{vin17, vehicle});
         String key = String.format("%s-%s-%s", vehicle.getBrand(), vehicle.getModel(), vehicle.getYear());
         return parts.get(key);
     }
