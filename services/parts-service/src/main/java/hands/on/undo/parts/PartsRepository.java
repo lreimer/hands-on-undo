@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -29,7 +30,7 @@ public class PartsRepository {
     private URI baseUri;
 
     private VehicleClient client;
-    private Map<String, Collection<Part>> parts = new HashMap<>();
+    private Map<String, List<Part>> parts = new HashMap<>();
 
     @PostConstruct
     public void initialize() {
@@ -51,7 +52,8 @@ public class PartsRepository {
     public Collection<Part> findParts(String vin17) {
         LOGGER.log(Level.INFO, "vin17=%s", vin17);
         if (vin17 == null) {
-            return Collections.emptyList();
+            // return all parts
+            return parts.values().stream().flatMap(List::stream).collect(Collectors.toList());
         }
 
         Vehicle vehicle = client.getVehicle(vin17);
