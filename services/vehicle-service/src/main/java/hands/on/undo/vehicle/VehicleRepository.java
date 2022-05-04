@@ -12,10 +12,6 @@ public class VehicleRepository {
 
     private Map<String, Vehicle> vehicles = new HashMap<>();
 
-    public VehicleRepository() {
-        initialize();
-    }
-
     @PostConstruct
     public void initialize() {
         vehicles.put("WVWZZZ1JZ3W386752", new Vehicle("WVWZZZ1JZ3W386752", "VW", "1J", "2003"));
