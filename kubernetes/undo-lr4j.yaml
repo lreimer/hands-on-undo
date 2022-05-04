@@ -2,7 +2,7 @@ apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 
 metadata:
-  name: undo-eks
+  name: undo-lr4j
   region: eu-central-1
   version: "1.21"
 
@@ -10,6 +10,7 @@ iam:
   withOIDC: true
 
 vpc:
+  vpcId: TODO
   clusterEndpoints:
     privateAccess: true
     publicAccess: true
@@ -19,7 +20,7 @@ cloudWatch:
     enableTypes: ["*"]
 
 managedNodeGroups:
-  - name: managed-ng-1
+  - name: managed-undo-lr4j-ng-1
     instanceType: t3.medium
     minSize: 3
     maxSize: 5

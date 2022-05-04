@@ -1,17 +1,3 @@
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
-kind: Kustomization
-metadata:
-  name: aws-load-balancer-controller-crds
-  namespace: flux-system
-spec:
-  interval: 5m0s
-  path: ./stable/aws-load-balancer-controller/crds
-  prune: true
-  sourceRef:
-    kind: GitRepository
-    name: aws-eks-charts
-  validation: client
----
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -33,7 +19,9 @@ spec:
       retries: 3
   # https://github.com/aws/eks-charts/tree/master/stable/aws-load-balancer-controller
   values:
-    clusterName: undo-eks
+    clusterName: flux2-dev-cluster
+    region: eu-central-1
+    vpcId: vpc-08907bbf38f6a8cc6
     serviceAccount:
       create: false
       name: aws-load-balancer-controller
