@@ -43,7 +43,7 @@ bootstrap-demo-flux2:
 		--read-write-key \
   		--personal
 
-create-lr4j-cluster: iam-policy.json efs-policy.json
+create-lr4j-cluster:
 	@eksctl create cluster -f undo-lr4j.yaml
 	@eksctl create iamserviceaccount \
 		--cluster=undo-lr4j \
