@@ -14,9 +14,8 @@ You need to have the following tools installed locally to be able to complete al
 ## Local Installation
 
 ```bash
-# install latest Crossplane release using Helm in a dedicated namespace
-kubectl create namespace undo-demo
-kubectl create namespace undo-replay
+cd services/
+tilt up
 ```
 
 ## Bootstrapping
@@ -27,9 +26,9 @@ $ export AWS_ACCOUNT_ID=`aws sts get-caller-identity --query Account --output te
 $ export GITHUB_USER=<your-username>
 $ export GITHUB_TOKEN=<your-token>
 
-# setup an EKS cluster with Flux2
-$ make create-cluster
-$ make bootstrap-flux2
+# setup demo cluster with Flux2
+$ make create-demo-cluster
+$ make bootstrap-demo-flux2
 $ git pull
 
 # modify Flux System kustomization YAML and add (with Git add and push)
@@ -38,13 +37,7 @@ $ flux reconcile source git flux-system
 $ flux reconcile kustomization flux-system
 $ flux get all
 
-# you also need to create the webhook for the Git Repository
-# Payload URL: http://<LoadBalancerAddress>/<ReceiverURL>
-# Secret: the webhook-token value
-$ kubectl -n flux-system get svc/receiver
-$ kubectl -n flux-system get receiver/webapp
-
-$ make delete-cluster
+$ make delete-clusters
 ```
 
 ## Maintainer

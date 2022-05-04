@@ -76,4 +76,4 @@ bootstrap-lr4j-flux2:
 delete-lr4j-cluster:
 	@eksctl delete cluster -f undo-lr4j.yaml
 
-delete-cluster: delete-demo-cluster delete-lr4j-cluster
+delete-clusters: delete-demo-cluster delete-lr4j-cluster
