@@ -1,6 +1,0 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-resources:
-  - aws-eks-sources.yaml
-  - kubernetes-sigs-sources.yaml
-  - aws-elb-controller/
