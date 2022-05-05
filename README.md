@@ -31,6 +31,16 @@ $ make create-demo-cluster
 $ make bootstrap-demo-flux2
 $ git pull
 
+# setup replay cluste with Flux2 in same VPC
+$ aws ec2 describe-vpcs --filters "Name=isDefault,Values=false"
+# take vpc-id from previous output as filter Value
+$ aws ec2 describe-subnets --filters "Name=vpc-id,Values=vpc-0545b3d93b368121b"
+# fill in the VPC and subnet IDs into the replay cluster YAML
+
+$ make create-lr4j-cluster
+$ make bootstrap-lr4j-flux2
+$ git pull
+
 # modify Flux System kustomization YAML and add (with Git add and push)
 # - cluster-sync.yaml
 $ flux reconcile source git flux-system

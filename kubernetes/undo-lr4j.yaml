@@ -10,7 +10,22 @@ iam:
   withOIDC: true
 
 vpc:
-  vpcId: TODO
+  id: vpc-0545b3d93b368121b
+  subnets:
+    private:
+      eu-central-1b:
+        id: "subnet-0d17a300e72b4d2b0"
+      eu-central-1a:
+        id: "subnet-09289c374644b0b5c"
+      eu-central-1c:
+        id: "subnet-03799901aa977dc66"
+    public:
+      eu-central-1a:
+        id: "subnet-07d76dd5e7f1c9341"
+      eu-central-1b:
+        id: "subnet-07743366f5f5c5b95"
+      eu-central-1c:
+        id: "subnet-0d3a2c48d9efb9771"
   clusterEndpoints:
     privateAccess: true
     publicAccess: true
