@@ -3,3 +3,5 @@ kind: Kustomization
 resources:
 - demo-namespace.yaml
 - lr4j-namespace.yaml
+- vehicle-service/
+- parts-service/
