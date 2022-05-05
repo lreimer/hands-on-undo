@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.Dependent;
 
-@ApplicationScoped
+@Dependent
 public class VehicleRepository {
 
     private Map<String, Vehicle> vehicles = new HashMap<>();
