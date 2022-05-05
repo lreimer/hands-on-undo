@@ -11,6 +11,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: vehicle-service
+    namespace: demo
   validation: client
   # we supply an inline patch for the deployment
   patchesStrategicMerge:
