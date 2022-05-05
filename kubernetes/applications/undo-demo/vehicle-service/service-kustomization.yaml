@@ -1,0 +1,28 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: vehicle-service-default
+  namespace: demo
+spec:
+  interval: 5m0s
+  path: ./services/vehicle-service/k8s
+  prune: true
+  targetNamespace: demo
+  sourceRef:
+    kind: GitRepository
+    name: vehicle-service
+  validation: client
+  # we supply an inline patch for the deployment
+  patchesStrategicMerge:
+    - apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: vehicle-service
+      spec:
+        replicas: 2
+        template:
+          spec:
+            containers:
+            - name: vehicle-service
+              image: lreimer/vehicle-service:default
+              imagePullPolicy: Always
