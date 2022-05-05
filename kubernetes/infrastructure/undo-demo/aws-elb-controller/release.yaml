@@ -19,9 +19,9 @@ spec:
       retries: 3
   # https://github.com/aws/eks-charts/tree/master/stable/aws-load-balancer-controller
   values:
-    clusterName: flux2-dev-cluster
+    clusterName: undo-demo
     region: eu-central-1
-    vpcId: vpc-08907bbf38f6a8cc6
+    vpcId: vpc-0545b3d93b368121b
     serviceAccount:
       create: false
       name: aws-load-balancer-controller
