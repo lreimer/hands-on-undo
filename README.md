@@ -28,7 +28,8 @@ $ export GITHUB_TOKEN=<your-token>
 
 # setup demo cluster with Flux2
 $ make create-demo-cluster
-$ make bootstrap-demo-flux2
+$ make create-demo-iam
+$ make create-demo-flux2
 $ git pull
 
 # setup replay cluste with Flux2 in same VPC
@@ -37,8 +38,10 @@ $ aws ec2 describe-vpcs --filters "Name=isDefault,Values=false"
 $ aws ec2 describe-subnets --filters "Name=vpc-id,Values=vpc-0545b3d93b368121b"
 # fill in the VPC and subnet IDs into the replay cluster YAML
 
+# setup lr4j cluster with Flux2
 $ make create-lr4j-cluster
-$ make bootstrap-lr4j-flux2
+$ make create-lr4j-iam
+$ make create-lr4j-flux2
 $ git pull
 
 # modify Flux System kustomization YAML and add (with Git add and push)

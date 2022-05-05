@@ -12,6 +12,8 @@ efs-policy.json:
 
 create-demo-cluster: iam-policy.json efs-policy.json
 	@eksctl create cluster -f undo-demo.yaml
+
+create-demo-iam:
 	@eksctl create iamserviceaccount \
 		--cluster=undo-demo \
 		--namespace=kube-system \
@@ -32,7 +34,7 @@ create-demo-cluster: iam-policy.json efs-policy.json
 delete-demo-cluster:
 	@eksctl delete cluster -f undo-demo.yaml
 
-bootstrap-demo-flux2:
+create-demo-flux2:
 	@echo "Choose demo cluster context"
 	@flux bootstrap github \
 		--owner=$(GITHUB_USER) \
@@ -45,6 +47,8 @@ bootstrap-demo-flux2:
 
 create-lr4j-cluster:
 	@eksctl create cluster -f undo-lr4j.yaml
+
+create-lr4j-iam:
 	@eksctl create iamserviceaccount \
 		--cluster=undo-lr4j \
 		--namespace=kube-system \
@@ -62,7 +66,7 @@ create-lr4j-cluster:
 		--override-existing-serviceaccounts \
     	--region eu-central-1
 
-bootstrap-lr4j-flux2:
+create-lr4j-flux2:
 	@echo "Choose lr4j cluster context"
 	@flux bootstrap github \
 		--owner=$(GITHUB_USER) \
