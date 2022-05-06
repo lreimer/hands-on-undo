@@ -11,16 +11,46 @@ You need to have the following tools installed locally to be able to complete al
 - [flux](https://fluxcd.io/docs/get-started/)
 - [Helm](https://helm.sh/docs/intro/install/)
 
+## Demo
+
+The demo can be run either locally or remotely in the AWS cloud. Make sure to
+follow the below instructions on how to install the demo for you environment.
+Then you can start with your reverse debugging session.
+
+```bash
+# follow instructions for local or AWS installation
+$ cd service/
+
+# (optional) in case of AWS use the following commands
+$ VEHICLE_LR4J_HOST=`kubectl get service vehicle-service -n lr4j -o jsonpath="{.status.loadBalancer.ingress[0].hostname}"`
+$ PARTS_LR4J_HOST=`kubectl get service parts-service -n lr4j -o jsonpath="{.status.loadBalancer.ingress[0].hostname}"`
+$ DEMO_HOST=`kubectl get service krakend-gateway -n default -o jsonpath="{.status.loadBalancer.ingress[0].hostname}"`
+
+# you can also use make demo-full
+$ make start-recording 
+$ make demo-calls 
+$ make save-recordings 
+$ make get-recordings 
+$ make stop-recordings
+
+# prepare the LR4j replay (or make docker-lr4j-all)
+$ make docker-lr4j-base
+$ make docker-lr4j-parts
+$ make docker-lr4j-vehicle
+```
+
 ## Local Installation
 
 ```bash
-cd services/
-tilt up
+$ cd services/
+$ tilt up
 ```
 
-## Bootstrapping
+## AWS Installation
 
 ```bash
+$ cd kubernetes/
+
 # define required ENV variables for the next steps to work
 $ export AWS_ACCOUNT_ID=`aws sts get-caller-identity --query Account --output text`
 $ export GITHUB_USER=<your-username>

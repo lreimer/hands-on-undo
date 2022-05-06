@@ -1,5 +1,6 @@
 DEMO_HOST ?= localhost
-LR4J_HOST ?= localhost
+VEHICLE_LR4J_HOST ?= localhost
+PARTS_LR4J_HOST ?= localhost
 
 build-vehicle-service:
 	@cd vehicle-service && ./gradlew ass
@@ -21,24 +22,24 @@ docker-parts-service: build-parts-service
 
 start-recording:
 	@echo "Start recording"
-	@curl -X POST http://$(LR4J_HOST):18081/api/lr4j
-	@curl -X POST http://$(LR4J_HOST):18080/api/lr4j
+	@curl -X POST http://$(VEHICLE_LR4J_HOST):18081/api/lr4j
+	@curl -X POST http://$(PARTS_LR4J_HOST):18080/api/lr4j
 	@sleep 3
 
 save-recordings:
 	@echo "Save recordings"
-	@curl -X PUT http://$(LR4J_HOST):18081/api/lr4j/vehicle.undo
-	@curl -X PUT http://$(LR4J_HOST):18080/api/lr4j/parts.undo
+	@curl -X PUT http://$(VEHICLE_LR4J_HOST):18081/api/lr4j/vehicle.undo
+	@curl -X PUT http://$(PARTS_LR4J_HOST):18080/api/lr4j/parts.undo
 
 get-recordings:
 	@echo "Get recordings"
-	@curl -o replay-image/vehicle.undo http://$(LR4J_HOST):18081/api/lr4j/vehicle.undo
-	@curl -o replay-image/parts.undo http://$(LR4J_HOST):18080/api/lr4j/parts.undo
+	@curl -o replay-image/vehicle.undo http://$(VEHICLE_LR4J_HOST):18081/api/lr4j/vehicle.undo
+	@curl -o replay-image/parts.undo http://$(PARTS_LR4J_HOST):18080/api/lr4j/parts.undo
 
 stop-recordings:
 	@echo "Stop recording"
-	@curl -X DELETE http://$(LR4J_HOST):18081/api/lr4j
-	@curl -X DELETE http://$(LR4J_HOST):18080/api/lr4j
+	@curl -X DELETE http://$(VEHICLE_LR4J_HOST):18081/api/lr4j
+	@curl -X DELETE http://$(PARTS_LR4J_HOST):18080/api/lr4j
 
 demo-calls:
 	@echo "Getting parts for known VIN17"
