@@ -46,6 +46,13 @@
         }
     ],
     "extra_config": {
+        "telemetry/logging": {
+            "level": "INFO",
+            "prefix": "[KRAKEND]",
+            "syslog": false,
+            "stdout": true,
+            "format": "default"
+        },
         "security/cors": {
             "allow_origins": [ "*" ],
             "allow_methods": [ "GET" ],
