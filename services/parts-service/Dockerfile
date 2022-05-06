@@ -14,5 +14,5 @@ ENV LR4J_DIRECTORY=$PAYARA_PATH/replay
 # COPY replay/ $LR4J_DIRECTORY
 COPY libs/lr4j-record-1.0.so $PAYARA_PATH
 
-ENTRYPOINT ["java", "-agentpath:/opt/payara/lr4j-record-1.0.so", "-XX:-Inline", "-XX:TieredStopAtLevel=1", "-XX:UseAVX=2", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=75.0", "-XX:ThreadStackSize=256", "-XX:MaxMetaspaceSize=128m", "-XX:+UseG1GC", "-XX:MaxGCPauseMillis=250", "-jar", "/opt/payara/payara-micro.jar"]
+ENTRYPOINT ["java", "-agentpath:/opt/payara/lr4j-record-1.0.so", "-XX:-Inline", "-XX:TieredStopAtLevel=1", "-Dsun.zip.disableMemoryMapping=true", "-XX:UseAVX=2", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=75.0", "-XX:ThreadStackSize=256", "-XX:MaxMetaspaceSize=128m", "-XX:+UseG1GC", "-XX:MaxGCPauseMillis=250", "-jar", "/opt/payara/payara-micro.jar"]
 CMD ["--nocluster", "--disablephonehome", "--deploymentDir", "/opt/payara/deployments"]

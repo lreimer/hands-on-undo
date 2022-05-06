@@ -32,8 +32,8 @@ save-recordings:
 
 get-recordings:
 	@echo "Get recordings"
-	@curl -o vehicle.undo http://$(LR4J_HOST):18081/api/lr4j/vehicle.undo
-	@curl -o parts.undo http://$(LR4J_HOST):18080/api/lr4j/parts.undo
+	@curl -o replay-image/vehicle.undo http://$(LR4J_HOST):18081/api/lr4j/vehicle.undo
+	@curl -o replay-image/parts.undo http://$(LR4J_HOST):18080/api/lr4j/parts.undo
 
 stop-recordings:
 	@echo "Stop recording"
@@ -53,3 +53,14 @@ demo-calls:
 	@sleep 3
 
 demo-full: start-recording demo-calls save-recordings get-recordings stop-recordings
+
+docker-lr4j-base:
+	@docker build -t lreimer/lr4j-replay:base --target base replay-image/
+
+docker-lr4j-parts:
+	@docker build -t lreimer/lr4j-replay:parts --target parts replay-image/
+
+docker-lr4j-vehicle:
+	@docker build -t lreimer/lr4j-replay:vehicle --target vehicle replay-image/
+
+docker-lr4j-all: docker-lr4j-base docker-lr4j-parts docker-lr4j-vehicle

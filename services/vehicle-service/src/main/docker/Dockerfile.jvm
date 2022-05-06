@@ -97,4 +97,4 @@ RUN mkdir /deployments/replay
 ENV LR4J_DIRECTORY=/deployments/replay
 
 COPY --chown=185 libs/lr4j-record-1.0.so /deployments/lib/
-ENV JAVA_OPTS="-agentpath:/deployments/lib/lr4j-record-1.0.so -XX:-Inline -XX:TieredStopAtLevel=1 -XX:UseAVX=2 -Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager"
+ENV JAVA_OPTS="-agentpath:/deployments/lib/lr4j-record-1.0.so -XX:-Inline -XX:TieredStopAtLevel=1 -Dsun.zip.disableMemoryMapping=true -XX:UseAVX=2 -Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager"
