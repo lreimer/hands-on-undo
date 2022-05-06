@@ -22,9 +22,9 @@ Then you can start with your reverse debugging session.
 $ cd service/
 
 # (optional) in case of AWS use the following commands
-$ VEHICLE_LR4J_HOST=`kubectl get service vehicle-service -n lr4j -o jsonpath="{.status.loadBalancer.ingress[0].hostname}"`
-$ PARTS_LR4J_HOST=`kubectl get service parts-service -n lr4j -o jsonpath="{.status.loadBalancer.ingress[0].hostname}"`
-$ DEMO_HOST=`kubectl get service krakend-gateway -n default -o jsonpath="{.status.loadBalancer.ingress[0].hostname}"`
+$ export VEHICLE_LR4J_HOST=`kubectl get service vehicle-service -n lr4j -o jsonpath="{.status.loadBalancer.ingress[0].hostname}"`
+$ export PARTS_LR4J_HOST=`kubectl get service parts-service -n lr4j -o jsonpath="{.status.loadBalancer.ingress[0].hostname}"`
+$ export DEMO_HOST=`kubectl get service krakend-gateway -n default -o jsonpath="{.status.loadBalancer.ingress[0].hostname}"`
 
 # you can also use make demo-full
 $ make start-recording 
@@ -37,6 +37,10 @@ $ make stop-recordings
 $ make docker-lr4j-base
 $ make docker-lr4j-parts
 $ make docker-lr4j-vehicle
+
+# start IntelliJ with LR4J plugin
+$ docker run -it -p 9000:9000 lreimer/lr4j-replay:parts
+$ docker run -it -p 9001:9000 lreimer/lr4j-replay:vehicle
 ```
 
 ## Local Installation
