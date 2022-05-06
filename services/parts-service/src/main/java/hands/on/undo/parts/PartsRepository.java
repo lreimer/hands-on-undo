@@ -50,7 +50,6 @@ public class PartsRepository {
     }
 
     public Collection<Part> findParts(String vin17) {
-        LOGGER.log(Level.INFO, "vin17=%s", vin17);
         if (vin17 == null) {
             // return all parts
             return parts.values().stream()
@@ -58,7 +57,7 @@ public class PartsRepository {
         }
 
         Vehicle vehicle = client.getVehicle(vin17);
-        LOGGER.log(Level.INFO, "vin17=%s --> vehicle=%s", new Object[]{vin17, vehicle});
+        LOGGER.log(Level.INFO, "vin17={0} --> vehicle={0}", new Object[]{vin17, vehicle});
         String key = String.format("%s-%s-%s", vehicle.getBrand(), vehicle.getModel(), vehicle.getYear());
         return parts.get(key);
     }
