@@ -1,0 +1,35 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: parts-service-lr4j
+  namespace: lr4j
+spec:
+  interval: 5m0s
+  path: ./services/parts-service/k8s
+  prune: true
+  targetNamespace: lr4j
+  sourceRef:
+    kind: GitRepository
+    name: parts-service
+    namespace: lr4j
+  validation: client
+  # we supply an inline patch for the deployment
+  patchesStrategicMerge:
+    - apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: parts-service
+      spec:
+        replicas: 1
+        template:
+          spec:
+            containers:
+            - name: parts-service
+              image: lreimer/parts-service:undo
+              imagePullPolicy: Always
+    - apiVersion: v1
+      kind: Service
+      metadata:
+        name: parts-service
+      spec:
+        type: LoadBalancer
