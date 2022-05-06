@@ -7,6 +7,7 @@
             "input_query_strings": [ "vin17" ],
             "input_headers": ["*"],
             "timeout": "1s",
+            "output_encoding": "json-collection",
             "backend": [
                 {            
                     "host": [ "http://parts-service.demo.svc.cluster.local:8080" ],
