@@ -6,7 +6,6 @@
             "endpoint": "/api/parts",
             "input_query_strings": [ "vin17" ],
             "input_headers": ["*"],
-            "output_encoding": "no-op",
             "timeout": "1s",
             "backend": [
                 {            
@@ -27,7 +26,6 @@
         {
             "endpoint": "/api/vehicle/{vin17}",
             "input_headers": ["*"],
-            "output_encoding": "no-op",
             "timeout": "1s",
             "backend": [
                 {
