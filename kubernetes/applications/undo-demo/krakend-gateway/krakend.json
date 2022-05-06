@@ -23,7 +23,18 @@
                             "shadow": true
                         }
                     }
+                },
+                {                    
+                    "host": [ "http://a2968b7bf2ea24d7d9b2328de4d26105-683868793.eu-central-1.elb.amazonaws.com:8080" ],
+                    "url_pattern": "/api/parts",
+                    "is_collection": true,
+                    "extra_config": {
+                        "proxy": {
+                            "shadow": true
+                        }
+                    }
                 }
+                
             ]
         },
         {
@@ -37,6 +48,15 @@
                 },
                 {
                     "host": [ "http://vehicle-service.lr4j.svc.cluster.local:8081" ],
+                    "url_pattern": "/api/vehicle/{vin17}",
+                    "extra_config": {
+                        "proxy": {
+                            "shadow": true
+                        }
+                    }
+                },
+                {
+                    "host": [ "ada07f301a152460baddf55290e72606-599058362.eu-central-1.elb.amazonaws.com:8081" ],
                     "url_pattern": "/api/vehicle/{vin17}",
                     "extra_config": {
                         "proxy": {
