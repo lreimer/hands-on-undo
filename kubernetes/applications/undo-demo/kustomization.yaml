@@ -5,3 +5,4 @@ resources:
 - lr4j-namespace.yaml
 - vehicle-service/
 - parts-service/
+- krakend-gateway/

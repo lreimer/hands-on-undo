@@ -1,0 +1,60 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: krakend-gateway
+spec:
+  type: LoadBalancer
+  sessionAffinity: None
+  selector:
+    app: krakend
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8080
+      targetPort: http
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: krakend-gateway
+spec:
+  selector:
+    matchLabels:
+      app: krakend
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: krakend
+    spec:
+      containers:
+        - name: krakend
+          image: devopsfaith/krakend:2.0.4
+          imagePullPolicy: IfNotPresent
+          args: [ "run", "-d", "-c", "/etc/krakend/krakend.json", "-p", "8080" ]
+          env:
+            - name: GIN_MODE
+              value: release
+            - name: KRAKEND_PORT
+              value: "8080"
+          ports:
+            - name: http
+              containerPort: 8080        
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "128Mi"
+            requests:
+              cpu: "500m"
+              memory: "128Mi"
+          volumeMounts:
+            - mountPath: /etc/krakend
+              name: config-volume
+      volumes:
+        - name: config-volume
+          configMap:
+            name: krakend-config
+            items:
+              - key: krakend.json
+                path: krakend.json

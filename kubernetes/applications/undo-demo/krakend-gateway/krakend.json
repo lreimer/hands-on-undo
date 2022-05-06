@@ -1,0 +1,60 @@
+{
+    "$schema": "https://www.krakend.io/schema/v3.json",
+    "version": 3,
+    "endpoints": [
+        {
+            "endpoint": "/api/parts",
+            "input_query_strings": [ "vin17" ],
+            "input_headers": ["*"],
+            "output_encoding": "no-op",
+            "timeout": "1s",
+            "backend": [
+                {            
+                    "host": [ "http://parts-service.demo.svc.cluster.local:8080" ],
+                    "url_pattern": "/api/parts"
+                },
+                {                    
+                    "host": [ "http://parts-service.lr4j.svc.cluster.local:8080" ],
+                    "url_pattern": "/api/parts",
+                    "extra_config": {
+                        "proxy": {
+                            "shadow": true
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "endpoint": "/api/vehicle/{vin17}",
+            "input_headers": ["*"],
+            "output_encoding": "no-op",
+            "timeout": "1s",
+            "backend": [
+                {
+                    "host": [ "http://vehicle-service.demo.svc.cluster.local:8081" ],
+                    "url_pattern": "/api/vehicle/{vin17}"
+                },
+                {
+                    "url_pattern": "/api/vehicle/{vin17}",
+                    "host": [ "http://vehicle-service.lr4j.svc.cluster.local:8081" ],
+                    "extra_config": {
+                        "proxy": {
+                            "shadow": true
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "extra_config": {
+        "security/cors": {
+            "allow_origins": [ "*" ],
+            "allow_methods": [ "GET" ],
+            "expose_headers": [ "Content-Length", "Content-Type" ],
+            "allow_headers": [ "Accept-Language" ],
+            "max_age": "12h",
+            "allow_credentials": false,
+            "debug": false
+        }
+    }
+}
