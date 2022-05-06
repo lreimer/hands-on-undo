@@ -11,11 +11,13 @@
             "backend": [
                 {            
                     "host": [ "http://parts-service.demo.svc.cluster.local:8080" ],
-                    "url_pattern": "/api/parts"
+                    "url_pattern": "/api/parts",
+                    "is_collection": true
                 },
                 {                    
                     "host": [ "http://parts-service.lr4j.svc.cluster.local:8080" ],
                     "url_pattern": "/api/parts",
+                    "is_collection": true,
                     "extra_config": {
                         "proxy": {
                             "shadow": true
