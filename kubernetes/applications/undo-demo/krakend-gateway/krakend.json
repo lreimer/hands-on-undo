@@ -11,11 +11,13 @@
             "backend": [
                 {            
                     "host": [ "http://parts-service.demo.svc.cluster.local:8080" ],
+                    "sd": "dns",
                     "url_pattern": "/api/parts",
                     "is_collection": true
                 },
                 {                    
                     "host": [ "http://parts-service.lr4j.svc.cluster.local:8080" ],
+                    "sd": "dns",
                     "url_pattern": "/api/parts",
                     "is_collection": true,
                     "extra_config": {
@@ -33,11 +35,13 @@
             "backend": [
                 {
                     "host": [ "http://vehicle-service.demo.svc.cluster.local:8081" ],
+                    "sd": "dns",
                     "url_pattern": "/api/vehicle/{vin17}"
                 },
                 {
-                    "url_pattern": "/api/vehicle/{vin17}",
                     "host": [ "http://vehicle-service.lr4j.svc.cluster.local:8081" ],
+                    "sd": "dns",
+                    "url_pattern": "/api/vehicle/{vin17}",
                     "extra_config": {
                         "proxy": {
                             "shadow": true
