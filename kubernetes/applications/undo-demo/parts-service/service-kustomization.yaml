@@ -33,6 +33,10 @@ spec:
         name: parts-service
       spec:
         type: LoadBalancer
+        ports:
+        - protocol: TCP
+          port: 18080
+          targetPort: http
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization
@@ -69,3 +73,7 @@ spec:
         name: parts-service
       spec:
         type: LoadBalancer
+        ports:
+        - protocol: TCP
+          port: 18080
+          targetPort: http

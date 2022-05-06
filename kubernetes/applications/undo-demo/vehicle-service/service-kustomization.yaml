@@ -27,6 +27,16 @@ spec:
             - name: vehicle-service
               image: lreimer/vehicle-service:default
               imagePullPolicy: Always
+    - apiVersion: v1
+      kind: Service
+      metadata:
+        name: vehicle-service
+      spec:
+        type: LoadBalancer
+        ports:
+        - protocol: TCP
+          port: 18081
+          targetPort: http
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization
@@ -57,3 +67,13 @@ spec:
             - name: vehicle-service
               image: lreimer/vehicle-service:undo
               imagePullPolicy: Always
+    - apiVersion: v1
+      kind: Service
+      metadata:
+        name: vehicle-service
+      spec:
+        type: LoadBalancer
+        ports:
+        - protocol: TCP
+          port: 18081
+          targetPort: http
