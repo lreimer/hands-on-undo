@@ -34,7 +34,7 @@ spec:
       spec:
         type: LoadBalancer
         ports:
-          - name: http
+          - name: lb
             protocol: TCP
             port: 18080
             targetPort: http
@@ -75,7 +75,7 @@ spec:
       spec:
         type: LoadBalancer
         ports:
-          - name: http
+          - name: lb
             protocol: TCP
             port: 18080
             targetPort: http
