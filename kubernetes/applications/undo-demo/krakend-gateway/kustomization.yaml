@@ -3,6 +3,6 @@ kind: Kustomization
 resources:
 - krakend.yaml
 configMapGenerator:
-  - name: krankend-config
+  - name: krakend-config
     files:
       - krakend.json
