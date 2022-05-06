@@ -34,9 +34,10 @@ spec:
       spec:
         type: LoadBalancer
         ports:
-        - protocol: TCP
-          port: 18081
-          targetPort: http
+          - name: http
+            protocol: TCP
+            port: 18081
+            targetPort: http
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization
@@ -74,6 +75,7 @@ spec:
       spec:
         type: LoadBalancer
         ports:
-        - protocol: TCP
-          port: 18081
-          targetPort: http
+          - name: http
+            protocol: TCP
+            port: 18081
+            targetPort: http
