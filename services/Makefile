@@ -65,3 +65,9 @@ docker-lr4j-vehicle:
 	@docker build -t lreimer/lr4j-replay:vehicle --target vehicle replay-image/
 
 docker-lr4j-all: docker-lr4j-base docker-lr4j-parts docker-lr4j-vehicle
+
+replay-lr4j-parts:
+	@docker run -d -p 9000:9000 lreimer/lr4j-replay:parts
+
+replay-lr4j-vehicle:
+	@docker run -d -p 9001:9000 lreimer/lr4j-replay:vehicle
