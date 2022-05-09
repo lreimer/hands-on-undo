@@ -57,7 +57,7 @@ public class PartsRepository {
         }
 
         Vehicle vehicle = client.getVehicle(vin17);
-        LOGGER.log(Level.INFO, "vin17={0} --> vehicle={0}", new Object[]{vin17, vehicle});
+        LOGGER.log(Level.INFO, "vin17={0} --> vehicle={1}", new Object[]{vin17, vehicle});
         String key = String.format("%s-%s-%s", vehicle.getBrand(), vehicle.getModel(), vehicle.getYear());
         return parts.get(key);
     }
