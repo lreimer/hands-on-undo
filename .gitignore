@@ -11,6 +11,9 @@ bin/
 
 *.undo
 *.log
+*.zip
+*.tar.gz
+*.tgz
 
 # Ignore Gradle GUI config
 gradle-app.setting
