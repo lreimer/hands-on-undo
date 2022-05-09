@@ -18,4 +18,10 @@ $ make get-recordings
 
 # prepare and run the replay images
 $ make docker-lr4j-all
+$ make replay-lr4j-parts
+$ make replay-lr4j-vehicle
+
+# download log files from replay containers
+$ docker ps
+$ docker cp <CONTAINER_ID>:/opt/undo/bridge.log bridge.log
 ```

@@ -10,6 +10,7 @@ bin/
 .vscode/
 
 *.undo
+*.log
 
 # Ignore Gradle GUI config
 gradle-app.setting
