@@ -13,5 +13,5 @@ CMD [ "/opt/undo/lr4j/lr4j_replay", "-p", "9000" , "-i", "/opt/undo/parts.undo" 
 COPY parts.undo /opt/undo/
 
 FROM base as vehicle
-CMD [ "/opt/undo/lr4j/lr4j_replay", "-p", "9000" , "-i", "/opt/undo/vehicle.undo" ]
+CMD [ "/opt/undo/lr4j/lr4j_replay", "-p", "9001" , "-i", "/opt/undo/vehicle.undo" ]
 COPY vehicle.undo /opt/undo/
