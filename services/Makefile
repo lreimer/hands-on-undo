@@ -20,7 +20,7 @@ docker-parts-service: build-parts-service
 	@docker push lreimer/parts-service:default
 	@docker push lreimer/parts-service:undo
 
-start-recording:
+start-recordings:
 	@echo "Start recording"
 	@curl -X POST http://$(VEHICLE_LR4J_HOST):18081/api/lr4j
 	@curl -X POST http://$(PARTS_LR4J_HOST):18080/api/lr4j
@@ -67,7 +67,7 @@ docker-lr4j-vehicle:
 docker-lr4j-all: docker-lr4j-base docker-lr4j-parts docker-lr4j-vehicle
 
 replay-lr4j-parts:
-	@docker run -d -p 9000:9000 lreimer/lr4j-replay:parts
+	@docker run -it --rm -p 9000:9000 lreimer/lr4j-replay:parts
 
 replay-lr4j-vehicle:
-	@docker run -d -p 9001:9000 lreimer/lr4j-replay:vehicle
+	@docker run -it --rm -p 9001:9001 lreimer/lr4j-replay:vehicle
