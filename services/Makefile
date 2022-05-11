@@ -53,7 +53,7 @@ demo-calls:
 	@echo
 	@sleep 3
 
-demo-full: start-recording demo-calls save-recordings get-recordings stop-recordings
+demo-full: start-recording demo-calls save-recordings stop-recordings get-recordings
 
 docker-lr4j-base:
 	@docker build -t lreimer/lr4j-replay:base --target base replay-image/
